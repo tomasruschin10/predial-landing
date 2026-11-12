@@ -1,0 +1,99 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { CheckCircle, Clock, MessageCircle, Home } from "lucide-react";
+import logo from "@/assets/logo.png";
+
+const GraciasTasacion = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
+      {/* Minimal Navbar */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-primary border-b border-primary-foreground/10">
+        <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center">
+          <button onClick={() => navigate("/")} className="flex items-center">
+            <img src={logo} alt="Predial Emprendimientos" className="h-9 object-contain" />
+          </button>
+        </div>
+      </header>
+
+      {/* Main content */}
+      <main className="flex-1 flex items-center justify-center px-6 pt-16">
+        <div className="w-full max-w-md text-center py-20">
+
+          {/* Icon */}
+          <div className="w-20 h-20 bg-gold-light rounded-full flex items-center justify-center mx-auto mb-8">
+            <CheckCircle className="w-10 h-10 text-gold" />
+          </div>
+
+          {/* Heading */}
+          <h1 className="text-3xl font-bold text-foreground mb-3">
+            ¡Recibimos tu solicitud!
+          </h1>
+          <p className="text-muted-foreground text-base leading-relaxed mb-10">
+            Un tasador de nuestro equipo se va a comunicar con vos para coordinar
+            la visita a tu propiedad.
+          </p>
+
+          {/* Next steps card */}
+          <div className="bg-surface border border-border rounded-2xl p-6 mb-8 text-left space-y-4">
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-3">
+              ¿Qué pasa ahora?
+            </p>
+            {[
+              {
+                icon: Clock,
+                step: "1",
+                text: "En menos de 24 horas un tasador se contacta con vos para coordinar la visita.",
+              },
+              {
+                icon: Home,
+                step: "2",
+                text: "Visitamos tu propiedad y relevamos todas sus características en detalle.",
+              },
+              {
+                icon: CheckCircle,
+                step: "3",
+                text: "Te entregamos el informe de tasación con el valor real de mercado.",
+              },
+            ].map(({ step, text }) => (
+              <div key={step} className="flex items-start gap-3">
+                <span className="w-6 h-6 rounded-full bg-gold text-accent-foreground text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+                  {step}
+                </span>
+                <p className="text-sm text-foreground leading-relaxed">{text}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row gap-3">
+            <a
+              href="https://wa.me/5491162216632?text=Hola%2C%20acabo%20de%20solicitar%20una%20tasación%20y%20quería%20consultar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-2 bg-gold text-accent-foreground font-semibold py-3.5 rounded-xl hover:bg-gold/90 active:scale-[0.98] transition-all text-sm"
+            >
+              <MessageCircle className="w-4 h-4" />
+              Escribinos por WhatsApp
+            </a>
+            <button
+              onClick={() => navigate("/")}
+              className="flex-1 flex items-center justify-center gap-2 border border-border text-foreground font-medium py-3.5 rounded-xl hover:bg-muted transition-all text-sm"
+            >
+              <Home className="w-4 h-4" />
+              Ver emprendimientos
+            </button>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default GraciasTasacion;
